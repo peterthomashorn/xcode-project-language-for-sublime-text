@@ -1,0 +1,32 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - pbxproj
+scope: source.pbxproj
+contexts:
+  main:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: '"'
+      scope: punctuation.definition.string.begin.pbxproj
+      push: double_quoted_string
+
+    # Comments
+    - match: /\*
+      push:
+        - meta_scope: comment.block.pbxproj
+        - match: \*/
+          pop: true
+
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.pbxproj
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.pbxproj
+    - match: '\\.'
+      scope: constant.character.escape.pbxproj
+    - match: '"'
+      scope: punctuation.definition.string.end.pbxproj
+      pop: true

@@ -12,16 +12,20 @@ contexts:
       scope: punctuation.definition.string.begin.pbxproj
       push: double_quoted_string
 
-    # Comments
+    - match: //.*
+      scope: comment.line.double-slash.pbxproj
+
     - match: /\*
       push:
         - meta_scope: comment.block.pbxproj
         - match: \*/
           pop: true
 
-    # Numbers
     - match: '\b(-)?[0-9.]+\b'
       scope: constant.numeric.pbxproj
+
+    - match: '='
+      scope: keyword.operator.assignment.pbxproj
 
   double_quoted_string:
     - meta_scope: string.quoted.double.pbxproj
